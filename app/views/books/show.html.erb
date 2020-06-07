@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+	<div class="col-xs-3">
+
+		<h2>User info</h2>
+		<%= render 'users/profile', users: @user %>
+
+		
+		<%= render 'books/newform', book: @book %>
+
+	</div>
+
+	<div class="col-xs-9">
+		<h2>Book detail</h2>
+
+		<table class="table">
+				<tr>
+					<td>
+						<%= link_to user_path(@user) do %>
+						<%= attachment_image_tag @user, :profile_image, size: "100x100", format: 'jpeg', fallback: "no_image.jpg" %><br>
+						<%= @user.name %>
+						<% end %>
+					</td>
+					<td><%= link_to book_path(@show_book) do %>
+						<%= @show_book.title %>
+						<% end %>
+					</td>
+					<td><%= @show_book.body %></td>
+					<% if @user == current_user %>
+					  <td><%= link_to "Edit",edit_book_path(@show_book), class: "btn btn-success edit_book_#{@show_book.id}" %></td>
+					  <td><%= link_to "Destroy",book_path(@show_book), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-danger destroy_book_#{@show_book.id}" %></td>
+					<% end %>
+				</tr>
+			</table>
+
+	</div>
+  </div>
+</div>
